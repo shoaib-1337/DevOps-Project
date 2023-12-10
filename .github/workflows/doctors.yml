@@ -1,0 +1,27 @@
+name: CI/CD for Doctors Microservice
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    env:
+      DOCTORS_TAG: ${{ github.sha }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image for Doctors
+        run: |
+          docker build -t shoaib1337/ams-doctors .
+          docker tag shoaib1337/ams-doctors shoaib1337/ams-doctors:${DOCTORS_TAG}
+          echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+          docker push shoaib1337/ams-doctors:${DOCTORS_TAG}

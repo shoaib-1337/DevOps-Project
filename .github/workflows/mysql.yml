@@ -1,0 +1,27 @@
+name: CI/CD for MySQL Database
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    env:
+      DB_TAG: ${{ github.sha }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image for MySQL
+        run: |
+          docker build -t shoaib1337/ams-mysql .
+          docker tag shoaib1337/ams-mysql shoaib1337/ams-mysql:${DB_TAG}
+          echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+          docker push shoaib1337/ams-mysql:${DB_TAG}

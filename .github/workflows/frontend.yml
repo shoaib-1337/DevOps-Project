@@ -1,0 +1,27 @@
+name: CI/CD for Frontend Microservice
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    env:
+      FRONTEND_TAG: ${{ github.sha }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image for Frontend
+        run: |
+          docker build -t shoaib1337/ams-frontend .
+          docker tag shoaib1337/ams-frontend shoaib1337/ams-frontend:${FRONTEND_TAG}
+          echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+          docker push shoaib1337/ams-frontend:${FRONTEND_TAG}
