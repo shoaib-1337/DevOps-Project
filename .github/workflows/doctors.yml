@@ -21,6 +21,7 @@ jobs:
 
       - name: Build and push Docker image for Doctors
         run: |
+          cd doctors
           docker build -t shoaib1337/ams-doctors .
           docker tag shoaib1337/ams-doctors shoaib1337/ams-doctors:${DOCTORS_TAG}
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin

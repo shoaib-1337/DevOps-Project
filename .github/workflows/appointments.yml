@@ -21,6 +21,7 @@ jobs:
 
       - name: Build and push Docker image for Appointments
         run: |
+          cd appointments
           docker build -t shoaib1337/ams-appointments .
           docker tag shoaib1337/ams-appointments shoaib1337/ams-appointments:${APPOINTMENTS_TAG}
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin

@@ -21,6 +21,7 @@ jobs:
 
       - name: Build and push Docker image for Frontend
         run: |
+          cd frontend
           docker build -t shoaib1337/ams-frontend .
           docker tag shoaib1337/ams-frontend shoaib1337/ams-frontend:${FRONTEND_TAG}
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
