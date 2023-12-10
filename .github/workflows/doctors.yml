@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'doctors/**'
 
 jobs:
   build-and-push:
@@ -21,8 +23,14 @@ jobs:
 
       - name: Build and push Docker image for Doctors
         run: |
-          cd doctors
-          docker build -t shoaib1337/ams-doctors .
-          docker tag shoaib1337/ams-doctors shoaib1337/ams-doctors:${DOCTORS_TAG}
+          cd doctors-appointment-system/doctors
+          docker build -t shoaib1337/ams-doctors:${DOCTORS_TAG} .
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
           docker push shoaib1337/ams-doctors:${DOCTORS_TAG}
+
+      - name: Update Docker Compose file
+        run: |
+          sed -i 's|shoaib1337/ams-doctors:.*|shoaib1337/ams-doctors:${DOCTORS_TAG}|' docker-compose.yml
+          git add docker-compose.yml
+          git commit -m "Update Doctors image tag to ${DOCTORS_TAG}"
+          git push

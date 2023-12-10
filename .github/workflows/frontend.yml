@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'frontend/**'
 
 jobs:
   build-and-push:
@@ -21,8 +23,14 @@ jobs:
 
       - name: Build and push Docker image for Frontend
         run: |
-          cd frontend
-          docker build -t shoaib1337/ams-frontend .
-          docker tag shoaib1337/ams-frontend shoaib1337/ams-frontend:${FRONTEND_TAG}
+          cd doctors-appointment-system/frontend
+          docker build -t shoaib1337/ams-frontend:${FRONTEND_TAG} .
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
           docker push shoaib1337/ams-frontend:${FRONTEND_TAG}
+
+      - name: Update Docker Compose file
+        run: |
+          sed -i 's|shoaib1337/ams-frontend:.*|shoaib1337/ams-frontend:${FRONTEND_TAG}|' docker-compose.yml
+          git add docker-compose.yml
+          git commit -m "Update Frontend image tag to ${FRONTEND_TAG}"
+          git push
