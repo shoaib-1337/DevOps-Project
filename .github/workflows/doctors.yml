@@ -38,4 +38,4 @@ jobs:
               sed -i 's|shoaib1337/ams-doctors:.*|shoaib1337/ams-doctors:${DOCTORS_TAG}|' docker-compose.yml
               git add docker-compose.yml
               git commit -m "Update Doctors image tag to ${DOCTORS_TAG}"
-              git push origin HEAD:${{ github.ref }}
+              git push git@github.com:shoaib-1337/DevOps-Project.git HEAD:${{ github.ref }}

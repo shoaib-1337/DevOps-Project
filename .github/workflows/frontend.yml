@@ -38,4 +38,4 @@ jobs:
             sed -i 's|shoaib1337/ams-frontend:.*|shoaib1337/ams-frontend:${FRONTEND_TAG}|' docker-compose.yml
             git add docker-compose.yml
             git commit -m "Update Frontend image tag to ${FRONTEND_TAG}"
-            git push origin HEAD:${{ github.ref }}
+            git push git@github.com:shoaib-1337/DevOps-Project.git HEAD:${{ github.ref }}
