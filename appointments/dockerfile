@@ -1,0 +1,16 @@
+FROM python:3.10.13-alpine
+
+LABEL name="Python Application" \   
+     maintainer="Shoaib Ali <sali18089@gmail.com>" \
+     summary="A  Python(Flask) backend"
+
+# Create app directory
+WORKDIR /app
+
+EXPOSE 7070
+
+RUN pip install flask
+
+COPY app.py ./
+
+CMD [ "python", "./app.py" ]
