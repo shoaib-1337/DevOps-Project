@@ -23,7 +23,7 @@ jobs:
 
       - name: Build and push Docker image for MySQL
         run: |
-          cd doctors-appointment-system/mysql
+          cd mysql
           docker build -t shoaib1337/ams-mysql:${DB_TAG} .
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
           docker push shoaib1337/ams-mysql:${DB_TAG}
