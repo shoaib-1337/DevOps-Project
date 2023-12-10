@@ -35,7 +35,7 @@ jobs:
 
       - name: Update Docker Compose file
         run: |
-          sed -i 's|shoaib1337/ams-frontend:.*|shoaib1337/ams-frontend:${FRONTEND_TAG}|' docker-compose.yml
-          git add docker-compose.yml
-          git commit -m "Update Frontend image tag to ${FRONTEND_TAG}"
-          git push
+            sed -i 's|shoaib1337/ams-frontend:.*|shoaib1337/ams-frontend:${FRONTEND_TAG}|' docker-compose.yml
+            git add docker-compose.yml
+            git commit -m "Update Frontend image tag to ${FRONTEND_TAG}"
+            git push 

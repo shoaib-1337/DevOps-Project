@@ -35,7 +35,8 @@ jobs:
 
       - name: Update Docker Compose file
         run: |
-          sed -i 's|shoaib1337/ams-mysql:.*|shoaib1337/ams-mysql:${DB_TAG}|' docker-compose.yml
-          git add docker-compose.yml
-          git commit -m "Update MySQL image tag to ${DB_TAG}"
-          git push
+            sed -i 's|shoaib1337/ams-mysql:.*|shoaib1337/ams-mysql:${DB_TAG}|' docker-compose.yml
+            git add docker-compose.yml
+            git commit -m "Update MySQL image tag to ${DB_TAG}"
+            git push 
+        

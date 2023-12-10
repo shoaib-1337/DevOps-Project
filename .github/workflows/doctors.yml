@@ -35,7 +35,7 @@ jobs:
 
       - name: Update Docker Compose file
         run: |
-          sed -i 's|shoaib1337/ams-doctors:.*|shoaib1337/ams-doctors:${DOCTORS_TAG}|' docker-compose.yml
-          git add docker-compose.yml
-          git commit -m "Update Doctors image tag to ${DOCTORS_TAG}"
-          git push
+            sed -i 's|shoaib1337/ams-doctors:.*|shoaib1337/ams-doctors:${DOCTORS_TAG}|' docker-compose.yml
+            git add docker-compose.yml
+            git commit -m "Update Doctors image tag to ${DOCTORS_TAG}"
+            git push 
