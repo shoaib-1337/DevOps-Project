@@ -33,9 +33,15 @@ jobs:
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
           docker push shoaib1337/ams-doctors:${DOCTORS_TAG}
 
+      - name: Set up SSH key
+        run: |
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+        
       - name: Update Docker Compose file
         run: |
-              sed -i 's|shoaib1337/ams-doctors:.*|shoaib1337/ams-doctors:${DOCTORS_TAG}|' docker-compose.yml
-              git add docker-compose.yml
-              git commit -m "Update Doctors image tag to ${DOCTORS_TAG}"
-              git push git@github.com:shoaib-1337/DevOps-Project.git HEAD:${{ github.ref }}
+            sed -i 's|shoaib1337/ams-doctors:.*|shoaib1337/ams-doctors:${DOCTORS_TAG}|' docker-compose.yml
+            git add docker-compose.yml
+            git commit -m "Update Doctors image tag to ${DOCTORS_TAG}"
+            git push git@github.com:shoaib-1337/DevOps-Project.git HEAD:${{ github.ref }}
