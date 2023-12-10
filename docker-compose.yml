@@ -2,28 +2,28 @@ version: '3'
 
 services:
   appointments:
-    image: shoaib1337/ams-appointments:latest
+    image: shoaib1337/ams-appointments:${APPOINTMENTS_TAG}
     ports:
       - "7071:7070"
     networks:
       - mynetwork
 
   doctors:
-    image: shoaib1337/ams-doctors:latest
+    image: shoaib1337/ams-doctors:${DOCTORS_TAG}
     ports:
       - "9090:9090"
     networks:
       - mynetwork
 
   frontend:
-    image: shoaib1337/ams-frontend:latest
+    image: shoaib1337/ams-frontend:${FRONTEND_TAG}
     ports:
       - "3000:3000"
     networks:
       - mynetwork
 
   db:
-    image: mysql:latest
+    image: mysql:${DB_TAG}
     environment:
       MYSQL_ROOT_PASSWORD: example_root_password
       MYSQL_DATABASE: example_database
