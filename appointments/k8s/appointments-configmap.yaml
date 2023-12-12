@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: appointments
+data:
+  NAME: "shoaib"
+  PASSWORD: "shoaib123"

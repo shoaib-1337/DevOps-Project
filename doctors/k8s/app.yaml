@@ -15,6 +15,9 @@ spec:
       containers:
       - name: doctors
         image: shoaib1337/ams-doctors:${DOCTORS_TAG}
+        volumeMounts:
+        - name: details-volume
+          mountPath: /user
         ports:
         - containerPort: 9090
         resources:
@@ -36,6 +39,11 @@ spec:
             port: 9090
           initialDelaySeconds: 5
           periodSeconds: 5
+      volumes:
+      - name: details-volume
+        configMap:
+          name: doctors
+
 
 ---
 apiVersion: v1

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: doctors
+data:
+  details.txt: |
+    I'm shoaib and I'm a final year computer science student at FAST NUCES.
