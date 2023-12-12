@@ -21,10 +21,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-    #   - name: Set up Git identity
-    #     run: |
-    #         git config --global user.email "sali18089@gmail.com"
-    #         git config --global user.name "shoaib-1337"
+      - name: Set up Git identity
+        run: |
+             git config --global user.email "sali18089@gmail.com"
+             git config --global user.name "shoaib-1337"
 
       - name: Build and push Docker image for Appointments
         run: |
