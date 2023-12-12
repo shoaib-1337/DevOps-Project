@@ -12,9 +12,18 @@ spec:
       labels:
         app: doctors
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000  # my non-root user id is 1000
+      initContainers:
+      - name: init-ubuntu
+        image: ubuntu:20.04
+        command: ["/bin/sh", "-c"]
+        args:
+        - echo "Hello, I'm shoaib. Initiating..."; sleep 5
       containers:
       - name: doctors
-        image: shoaib1337/ams-doctors:${DOCTORS_TAG}
+        image: shoaib1337/ams-doctors
         volumeMounts:
         - name: details-volume
           mountPath: /user
@@ -57,4 +66,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 9090
-  type: LoadBalancer
+  type: NodePort

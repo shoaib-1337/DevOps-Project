@@ -12,9 +12,18 @@ spec:
       labels:
         app: frontend
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000  # my non-root user id is 1000
+      initContainers:
+      - name: init-ubuntu
+        image: ubuntu:20.04
+        command: ["/bin/sh", "-c"]
+        args:
+        - echo "Hello, I'm shoaib. Initiating..."; sleep 5
       containers:
       - name: frontend
-        image: shoaib1337/ams-frontend:${FRONTEND_TAG}
+        image: shoaib1337/ams-frontend
         ports:
         - containerPort: 3000
         resources:
@@ -49,4 +58,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 3000
-  type: LoadBalancer
+  type: NodePort
