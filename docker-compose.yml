@@ -2,21 +2,21 @@ version: '3'
 
 services:
   appointments:
-    image: shoaib1337/ams-appointments:${APPOINTMENTS_TAG}
+    image: shoaib1337/ams-appointments
     ports:
       - "7071:7070"
     networks:
       - mynetwork
 
   doctors:
-    image: shoaib1337/ams-doctors:${DOCTORS_TAG}
+    image: shoaib1337/ams-doctors
     ports:
       - "9090:9090"
     networks:
       - mynetwork
 
   frontend:
-    image: shoaib1337/ams-frontend:${FRONTEND_TAG}
+    image: shoaib1337/ams-frontend
     ports:
       - "3000:3000"
     networks:
