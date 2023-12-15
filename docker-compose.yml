@@ -2,7 +2,7 @@ version: '3'
 
 services:
   appointments:
-    image: shoaib1337/ams-appointments:latest
+    image: shoaib1337/ams-appointments:e1d0087e5cfba28e7b0554763f6819c539cb0a3b
     ports:
       - "7071:7070"
     networks:
