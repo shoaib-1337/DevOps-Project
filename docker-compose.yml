@@ -16,7 +16,7 @@ services:
       - mynetwork
 
   frontend:
-    image: shoaib1337/ams-frontend:latest
+    image: shoaib1337/ams-frontend:6baf75b8a59112ec3586c8a5ae1a11e8a17ff41a
     ports:
       - "3000:3000"
     networks:
