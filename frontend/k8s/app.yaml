@@ -26,6 +26,11 @@ spec:
         image: shoaib1337/ams-frontend
         ports:
         - containerPort: 3000
+        env:
+            - name: DOCTORS_SERVICE_URL
+              value: doctors-service:9090
+            - name: APPOINTMENTS_SERVICE_URL
+              value: appointments-service:7070
         resources:
           requests:
             memory: "64Mi"
@@ -56,6 +61,6 @@ spec:
     app: frontend
   ports:
     - protocol: TCP
-      port: 80
+      port: 3000
       targetPort: 3000
   type: NodePort
