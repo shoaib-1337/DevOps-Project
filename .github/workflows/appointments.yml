@@ -28,6 +28,14 @@ jobs:
              git config --global user.email "sali18089@gmail.com"
              git config --global user.name "shoaib-1337"
 
+
+      - name: Build and push Docker image for Doctors
+        run: |
+            cd doctors
+            docker build -t shoaib1337/ams-doctors:${DOCTORS_TAG} .
+            echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+            docker push shoaib1337/ams-doctors:${DOCTORS_TAG}       
+
       - name: Update Docker Compose file
         run: |
           sed -i "s|shoaib1337/ams-appointments:[0-9a-f]\{40\}|shoaib1337/ams-appointments:${{ github.sha }}|g; s|shoaib1337/ams-appointments:latest|shoaib1337/ams-appointments:${{ github.sha }}|g" docker-compose.yml
