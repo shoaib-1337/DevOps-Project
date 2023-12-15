@@ -37,10 +37,10 @@ jobs:
 
       - name: Update Docker Compose file
         run: |
-            sed -i "s|shoaib1337/ams-appointments:[0-9a-f]\{40\}|shoaib1337/ams-appointments:${{ github.sha }}|g; s|shoaib1337/ams-appointments:latest|shoaib1337/ams-appointments:${{ github.sha }}|g" docker-compose.yml
+            sed -i "s|shoaib1337/ams-frontend:[0-9a-f]\{40\}|shoaib1337/ams-frontend:${{ github.sha }}|g; s|shoaib1337/ams-frontend:latest|shoaib1337/ams-frontend:${{ github.sha }}|g" docker-compose.yml
 
 
-      - name: Update docker-compose with new image tag
+      - name: Push docker-compose with new image tag
         run: |
           git config user.email "sali18089@gmail.com" 
           git config user.name "shoaib-1338"

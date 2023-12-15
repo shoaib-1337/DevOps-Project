@@ -28,16 +28,17 @@ jobs:
              git config --global user.email "sali18089@gmail.com"
              git config --global user.name "shoaib-1337"
 
-      - name: Build and push Docker image for Appointments
-        run: |
-          cd appointments
-          docker build -t shoaib1337/ams-appointments:${APPOINTMENTS_TAG} .
-          echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-          docker push shoaib1337/ams-appointments:${APPOINTMENTS_TAG}
-
       - name: Update Docker Compose file
         run: |
-           sed -i 's|shoaib1337/ams-appointments:.*|shoaib1337/ams-appointments:${APPOINTMENTS_TAG}|' docker-compose.yml
-           git add docker-compose.yml
-           git commit -m "Update Appointments image tag to ${APPOINTMENTS_TAG}"
-           git push 
+          sed -i "s|shoaib1337/ams-appointments:[0-9a-f]\{40\}|shoaib1337/ams-appointments:${{ github.sha }}|g; s|shoaib1337/ams-appointments:latest|shoaib1337/ams-appointments:${{ github.sha }}|g" docker-compose.yml
+     
+     
+      - name: Push docker-compose with new image tag
+        run: |
+          git config user.email "sali18089@gmail.com" 
+          git config user.name "shoaib-1338"
+          git add docker-compose.yaml
+          git commit -m "Update appointments service image tag to ${{ github.sha }}"
+          git config pull.rebase true
+          git pull
+          git push https://${{ secrets.PAT }}@github.com/shoaib-1337/DevOps-Project.git HEAD:main
