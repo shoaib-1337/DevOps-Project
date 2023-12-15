@@ -9,7 +9,7 @@ services:
       - mynetwork
 
   doctors:
-    image: shoaib1337/ams-doctors:d497df40a782243832faf4f50c0f9d87e2bbeaf8
+    image: shoaib1337/ams-doctors:6baf75b8a59112ec3586c8a5ae1a11e8a17ff41a
     ports:
       - "9090:9090"
     networks:
